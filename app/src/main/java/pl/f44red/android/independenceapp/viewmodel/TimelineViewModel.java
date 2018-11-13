@@ -13,10 +13,15 @@ import pl.f44red.android.independenceapp.repositories.HistoryEventRepository;
 public class TimelineViewModel extends AndroidViewModel {
 
     private HistoryEventRepository repository;
+    private LiveData<List<HistoryEvent>> eventsPl;
+    private LiveData<List<HistoryEvent>> eventsLt;
 
     public TimelineViewModel(@NonNull Application application) {
         super(application);
         repository = new HistoryEventRepository(application);
+        // viewmodel will hold those values until changed in db despite of timeline activity lifecycle stage
+        eventsPl = repository.getAllEvents("pl");
+        eventsLt = repository.getAllEvents("lt");
     }
 
     public void insert(HistoryEvent event) {
@@ -24,6 +29,9 @@ public class TimelineViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<HistoryEvent>> getAllEvents(String countryCode) {
-        return repository.getAllEvents(countryCode);
+        if (countryCode.equals("pl"))
+            return eventsPl;
+        else
+            return eventsLt;
     }
 }
