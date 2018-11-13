@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TheRoadToIndependenceApp</string>
+
+    <string name="AND">and</string>
+    <string name="polish_timeline_title">Polish History Timeline</string>
+    <string name="lithuanian_timeline_title">Lithuanian History Timelline</string>
+</resources>
